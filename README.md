@@ -18,6 +18,8 @@ Para saber más de LOSS véase:
 
 [r/lossedits](https://www.reddit.com/r/lossedits/ "Loss Edits")
 
+[Talking to the Man Behind 'Loss,' the Internet's Longest-Running Miscarriage 'Joke'](http://nymag.com/selectall/2015/11/longest-running-miscarriage-meme-on-the-web.html)
+
 ## Dataset
 
 El dataset se obtuvo descargando edits de loss de la galería de Know Your Meme, buscando en Google Images (que contiene miniaturas de imágenes del subreddit y Know Your Meme, por lo que probablemente hay imágenes repetidas). Así como la colección personal de memes de los colaboradores.
@@ -50,7 +52,7 @@ donde `loss_edits` son las imágenes a distinguir de los memes vairados en `not_
 
 El dataset se puede descargar del siguiente link: [dataset.7z](https://drive.google.com/file/d/1CztpddBSFyG22YZojRtke98S4OcHD9S7/view?usp=sharing "dataset.7z")
 
-#### boi
+### Disclaimer
 
 El dataset contiene los memes de los desarrolladores, una colección bastante edgy de dank memes variados, se recomienda discreción. Los memes contenidos no representan el punto de vista sobre la sociedad, la vida o temas sensibles por parte de los desarrolladores.
 
