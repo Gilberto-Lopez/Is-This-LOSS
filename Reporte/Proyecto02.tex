@@ -47,8 +47,8 @@ López García Gilberto Isaac}
 
 \subsection{Datos}
 
-El conjunto de datos consiste de una colección de 1741 imágenes (1306 para
-entrenamiento y 433 para verificación), divididos en
+El conjunto de datos consiste de una colección de 1735 imágenes (1304 para
+entrenamiento y 431 para verificación), divididos en
 dos categorías, \texttt{loss\_edits} y \texttt{not\_loss}, donde la primera son
 edits de Loss, y la segunda memes variados.
 
@@ -56,10 +56,10 @@ Los memes variados se obtuvieron de la colección personal de memes de los
 desarrolladores, obtenidas con el paso del tiempo ya sea descargándolas de
 distintos sitios de internet como redes sociales, chats de WhatsApp, Messenger,
 etc., mientras que los edits de Loss se descargaron principalmente de la galería
-de KnowYourMeme.com\footnote{\url{http://knowyourmeme.com/memes/loss/photos}} y
-Google Images (que son miniaturas de distintos sitios, como el subreddit
-\texttt{r/lossedits}\footnote{\url{http://reddit.com/r/lossedits}} y
-KnowYourMeme.com por lo que puede haber imágenes repetidas en el dataset).
+de \textsf{KnowYourMeme.com}\footnote{\url{http://knowyourmeme.com/memes/loss/photos}} y
+\textsf{Google Images} (que son miniaturas de distintos sitios, como el subreddit
+\textsf{r/lossedits}\footnote{\url{http://reddit.com/r/lossedits}} y
+\textsf{KnowYourMeme.com} por lo que puede haber imágenes repetidas en el dataset).
 
 \subsubsection{Preprocesamiento}
 
@@ -71,9 +71,44 @@ reescalados para tener una resolución similar (250 pixeles de ancho), después 
 dividió el conjunto completo de imágenes en conjuntos de entrenamiento y
 verificación de manera aleatoria.
 
+Algunos edits de Loss se basan en el uso de colores, pero en general es la
+orientación de los polígonos lo que importa como se ve en la Figura ~\ref{fig:im1}.
+Para tratar estos casos se construyen modelos que trabajan con imágenes a color
+y modelos que trabajan con imágenes en escala de grises.
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=3cm,width=3cm]{loss_color}
+\includegraphics[height=3cm,width=3cm]{pokemon}
+\caption{Edit basado en color (izq.) y en orientación (der.)}
+\label{fig:im1}
+\end{figure}
+
+Procesar las imágenes para obtener las aristas se consideró una propuesta poco
+viable pues se tiene mucho ruido o se pierde información. Usando el modelo
+\textsc{Canny} de \textsc{OpenCV} para obtener las aristas presentes en una imagen
+nos encontramos con mucho ruido, por ejemplo, si un edit se contruyó con fotografías
+con muchos detalles en ellas y objetos innecesarios no fueron desenfocados, las
+aristas de dichos objetos se extraen en conjunto con los polígonos que nos
+interesan. Si modificamos los umbrales inferior y superior del modelo para filtrar
+aristas podemos eliminar aristas de los objetos que nos interesan realmente. Estos
+problemas se pueden apreciar en la Figura ~\ref{fig:im2}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{edges}
+\caption{Detección de aristas, algoritmo de Canny.}
+\label{fig:im2}
+\end{figure}
+
+Además, los umbrales inferior y superior pueden no funcionar en distintas imágenes,
+entregrando mucho ruido o pérdida de información. La baja resolución de las imágenes
+también dificulta este proceso.
+
 \subsection{Implementación}
 
-La implementación se realizó en el lenguaje de programación \textsc{Python}.
+La implementación se realizó en el lenguaje de programación \textsc{Python}%
+\footnote{Versión 3.6.4, \url{http://www.python.org/downloads/release/python-364/}}.
 Para la construcción de la red neuronal convolucional nos apoyamos de los
 paquetes \textsc{TensorFlow}\footnote{\url{http://www.tensorflow.org/}} y
 \textsc{Keras}\footnote{\url{http://keras.io}}.

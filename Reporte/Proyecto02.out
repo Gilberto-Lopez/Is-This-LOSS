@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introducci\363n}{}% 1
+\BOOKMARK [1][-]{section.2}{Descripci\363n del problema}{}% 2
+\BOOKMARK [1][-]{section.3}{Redes Neuronales Convolucionales}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Capa de convoluci\363n}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Pooling}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Perceptr\363n Multicapa}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{Espacio de Hip\363tesis}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.5}{Ventajas y desventajas}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Propuesta e implementaci\363n}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Datos}{section.4}% 10
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Preprocesamiento}{subsection.4.1}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Implementaci\363n}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Resultados}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Pruebas preliminares}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{Primer intento de clasificaci\363n}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{Segundo intento de clasificaci\363n}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.4}{Observaciones}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{Conclusiones}{}% 18
