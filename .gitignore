@@ -102,3 +102,9 @@ ENV/
 
 # Dataset
 dataset/
+
+# Latex
+**/*.out
+**/*.pdf
+**/*.aux
+**/*.log
