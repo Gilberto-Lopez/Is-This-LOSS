@@ -31,28 +31,76 @@ López García Gilberto Isaac}
 
 \section{Descripción del problema}
 
-\section{Redes Neuronales Convolucionales}
+\section{Redes Neuronales Convolucionales\cite{lecun}}
 
+Las redes convolucionales combinan tres ideas arquitectónicas para asegurar cierto
+grado de invariancia ante desplazamiento, reescalamiento y distorción: campos
+receptivos locales, pesos compartidos, y submuestreo espacial o temporal%
+\footnote{En inglés, \textit{local receptive fields}, \textit{shared weights},
+\textit{spatial or temporal sub-sampling}.}.
 
+La estructura general de una red neuronal convolucional consiste de:
+\begin{itemize}
+  \item Capa de convolución donde se realiza la detección de características.
+  \item Capa de pooling donde se extraen las características importantes.
+  \item Posiblemente más capas de convolución y pooling para extraer características
+  más complejas.
+  \item Un clasificador que asigna una categoría a la entrada en base a las
+  características encontradas.
+\end{itemize}
 
 \subsection{Capa de convolución}
 
+Con los campos receptivos se extraen características simples en localidades
+pequeñas que en capas posteriores
+son combinadas para detectar características de orden superior. Estas características
+pueden estar en distintas posiciones (espaciales o temporales) en las muestras
+de entrada por lo que se elige tener campos receptivos en distintas posiciones
+que comparten el mismo conjunto de pesos\footnote{Por decirlo de otra forma, un
+mismo campo receptivo se aplica a todo un ejemplar en distintas posiciones.}, y
+se obtiene un mapa de características o \textit{feature map}. Esta operación es
+una convolución.
 
+Por cada campo receptivo se obtiene un mapa de características, el conjunto de
+estos mapas forman una capa de convolución completa.
+
+Los mapas de caracerísticas tienen la propiedad de preservar las posiciones
+relativas de características. Una vez que una característica se ha detectado,
+su posición exacta se vuelve menos importante. Solo su posición relativa a otras
+características es relevante.
 
 \subsection{Pooling}
 
+Como la posición exacta de las características es irrelevante para identificar
+un patrón más complejo, e inclusive dañina pues puede variar entre muestras, se
+aplican capas de submuestreo que reduce el tamaño de los mapas de características
+preservando la información importante y reduciendo la sensibilidad de la salida
+a desplazamientos y distorsiones.
 
+La preservación de estas características importantes puede realizarse promediando
+valores locales (contiguos) en los mapas de características (manteniendo posiciones
+relativas entre características) que es \textit{averge sub-sampling}, o manteniendo
+los valores máximos en localidades contiguas que es \textit{max pooling}.
+
+\textit{Max pooling} ha demostrado dar mejores resultados en la praćtica que
+\textit{average sub-sampling}\cite{pooling}. Además, localidades contiguas que se traslapan
+no son una mejora significativa sobre aquellas que no se traslapan, estás
+últimas reducen aún más el tamaño de los mapas de características.
 
 \subsection{Perceptrón Multicapa}
 
-
+Una vez extraídas las múltiples características relevantes, con una reducción
+de dimensionalidad, y posiblemente combinadas para detección de características
+más complejas agregando capas de convolución y pooling, se puede utilizar un
+clasificador para determinar la categoría a la que pertenece un ejemplar.
+Generalmente un perceptrón multicapa o red \textit{feed-forward}.
 
 \subsection{Espacio de Hipótesis}
 
 Las redes neuronales convolucionales para reconocimiento de objetos en imágenes
 son funciones que asignan a sus entradas, imágenes de $N$ pixeles de alto por $M$
 pixeles de alto, una etiqueta o categoría, las imágenes se pueden representar
-como tensores de orden C, esto es, elementos del espacio
+como tensores de orden $C$, esto es, elementos del espacio
 $\mathbb{R}^{N\times M\times C}$, donde $C$ es el número de canales, que puede ser
 1 si se trabaja en escala de grises, 3 si se trabaja con colores (como RGB), etc.
 
@@ -67,10 +115,32 @@ Nuestro espacio de hipótesis son todas las redes convolucionales para clasficac
 de imágenes en resolución $250 \times 250$ con 1 canal en escala de grises y 3
 canales en RGB, con $K = 2$ categorías. Esto es al menos
 \[ 2^{256^{250^2}} \text{  y  } 2^{256^{250^2 \cdot 3}}\]
-redes convolucionales.
+redes convolucionales respectivamente.
 
 \subsection{Ventajas y desventajas}
 
+La principal ventaja de las redes convolucionales es que son capaces de encontrar
+características importantes en los datos por cuenta propia durante el entrenamiento,
+aprovechándose de la existencia de correlaciones locales entre los datos. Poseen
+un alto grado de invariancia ante cambios o distorciones en los datos pues
+se extraen características locales y se preserva la relación espacial o temporal
+entre ellas. Debido a que un mismo campo receptivo se aplica a distintas zonas de
+los datos hay una reducción en el número de parámetros libres que se
+deben ajustar en el entrenamiento\cite{haykin}.
+
+Entre las desventajas está el alto poder computacional requerido. Aunque hay una
+reducción de dimensionalidad al pasar de la entrada a mapas de características y
+pooling, la entrada suele tener dimensiones altas como se aprecia en la subsección
+anterior, por lo que capas convolucionales completas pueden tener un cantidad
+relativamente pequeña de mapas relativamente grandes, y aunque la dimensión sigue
+decreciendo en capas subsecuentes, el número de mapas sigue aumentando, entonces
+hay mayor cantidad de parámetros a ajustar al haber gran cantidad de campos receptivos,
+además del perceptrón multicapa que realiza la clasificación. También se requiere
+de un conjunto de datos para entrenamiento extenso para obtener buenos resutlados.
+
+En la práctica se han visto casos de redes convolucionales con un desempeño pobre
+ante cambios pequeños como cambios de iluminación en fotos, por lo que se podría
+pensar que tienen una tendencia a sobreajustarse.
 
 \section{Propuesta e implementación}
 
@@ -172,15 +242,9 @@ Para la construcción de la red neuronal convolucional nos apoyamos de los
 paquetes \textsc{TensorFlow}\footnote{\url{http://www.tensorflow.org/}} y
 \textsc{Keras}\footnote{\url{http://keras.io}}.
 
+Para nuestros modelos construimos 4 redes convolucionales.
+
 \section{Resultados}
-
-\subsection{Pruebas preliminares}
-
-\subsection{Primer intento de clasificación}
-
-\subsection{Segundo intento de clasificación}
-
-\subsection{Observaciones}
 
 \section{Conclusiones}
 
