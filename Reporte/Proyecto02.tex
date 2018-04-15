@@ -28,9 +28,29 @@ López García Gilberto Isaac}
 \maketitle
 
 \section{Introducción}
+El reconocimiento de objetos o patrones en imágenes siempre ha sido un reto para el ser humano, ya sea que se
+vea el rostro de alguna deidad en el tronco de un árbol o alguna forma geométrica irregular al fondo de una taza
+de té, pero hay veces que ciertas personas ven cierto patrón en alguna imagen y otras no, haciendo que nos
+preguntemos si el patrón que, según nosotros, estamos viendo o simplemente estamos perdiendo la cabeza. En otras
+palabras, la detección de ciertos patrones en imágenes puede llegar a ser complicada, entonces surge la
+pregunta, ¿existirá la manera de automatizar la detección de patrones?
 
+En este escrito expondremos una manera de tratar de solucionar este tipo de problemas usando redes neuronales
+convolucionales.
 \section{Descripción del problema}
+En la red existen cantidades colosales de imágenes de todo tipo, como caricaturas, motivacionales, científicas,
+etcétera. Un subconjunto de todas esas imágenes es conocido como 'memes', los cuales son imágenes que se burlan
+de algún tema, sin importar cual sea este.
 
+En el año 2008 un caricaturista, conocido por hacer caricaturas de humor, se salio totalmente de su estilo al
+publicar una imagen divida en cuatro partes, donde se ilustra un momento difícil de su vida (Ver figura 1,
+sección 4). Tiempo después los usuarios del internet convirtieron esa deprimente caricatura en un 'meme', y ahí
+nació el meme de 'Is this loss?', el cual consiste en una imagen en cuatro partes siguiendo el patrón de la
+caricatura original, es decir, en el primer cuadro debe haber algo que asemeje a una persona parada, en el
+segundo y tercero a dos personas y en el cuarto a una persona parada y una acostada.
+
+Por la naturaleza del meme, se genero una cantidad impresionante de 'edits' del mismo, en algunas de ellas
+es difícil saber si realmente corresponde al patrón o no. Se busca ver si una red neuronal puede identificar memes de este tipo, incluso cuando estos son difíciles de identificar para el ser humano.
 \section{Redes Neuronales Convolucionales\cite{lecun}}
 
 Las redes convolucionales combinan tres ideas arquitectónicas para asegurar cierto
@@ -79,7 +99,7 @@ a desplazamientos y distorsiones.
 
 La preservación de estas características importantes puede realizarse promediando
 valores locales (contiguos) en los mapas de características (manteniendo posiciones
-relativas entre características) que es \textit{averge sub-sampling}, o manteniendo
+relativas entre características) que es \textit{average sub-sampling}, o manteniendo
 los valores máximos en localidades contiguas que es \textit{max pooling}.
 
 \textit{Max pooling} ha demostrado dar mejores resultados en la praćtica que
@@ -168,7 +188,7 @@ econtrados que nos llevaron a descartar esta idea en el trabajo.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{lossminimal}
-\caption{Cómic origianl (izq.), patrón buscado (der.)}
+\caption{Cómic original (izq.), patrón buscado (der.)}
 \label{fig:loss}
 \end{figure}
 
