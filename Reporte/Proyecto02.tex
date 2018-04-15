@@ -28,34 +28,47 @@ López García Gilberto Isaac}
 \maketitle
 
 \section{Introducción}
+
 El reconocimiento de objetos o patrones en imágenes siempre ha sido un reto para el ser humano, ya sea que se
 vea el rostro de alguna deidad en el tronco de un árbol o alguna forma geométrica irregular al fondo de una taza
 de té, pero hay veces que ciertas personas ven cierto patrón en alguna imagen y otras no, haciendo que nos
-preguntemos si el patrón que, según nosotros, estamos viendo o simplemente estamos perdiendo la cabeza. En otras
+preguntemos si el patrón que, según nosotros, estamos viendo realmente está ahí o simplemente estamos perdiendo la cabeza. En otras
 palabras, la detección de ciertos patrones en imágenes puede llegar a ser complicada, entonces surge la
 pregunta, ¿existirá la manera de automatizar la detección de patrones?
 
-En este escrito expondremos una manera de tratar de solucionar este tipo de problemas usando redes neuronales
-convolucionales.
+En este escrito expondremos una manera de tratar de solucionar una instancia muy particular de este tipo de problemas usando redes neuronales convolucionales.
+
 \section{Descripción del problema}
+
 En la red existen cantidades colosales de imágenes de todo tipo, como caricaturas, motivacionales, científicas,
-etcétera. Un subconjunto de todas esas imágenes es conocido como 'memes', los cuales son imágenes que se burlan
-de algún tema, sin importar cual sea este.
+etcétera. Un subconjunto de todas esas imágenes es conocido como ``memes'', los cuales son imágenes que se burlan
+de algún tema o situación, sin importar cual sea este.
 
-En el año 2008 un caricaturista, conocido por hacer caricaturas de humor, se salio totalmente de su estilo al
-publicar una imagen divida en cuatro partes, donde se ilustra un momento difícil de su vida (Ver figura 1,
-sección 4). Tiempo después los usuarios del internet convirtieron esa deprimente caricatura en un 'meme', y ahí
-nació el meme de 'Is this loss?', el cual consiste en una imagen en cuatro partes siguiendo el patrón de la
+En el año 2008 un caricaturista humorístico se salió totalmente de su estilo al
+publicar un cómic donde se ilustra un momento difícil de su vida (ver Figura ~\ref{fig:loss}).
+Tras recibir muchas críticas, el cómic se viralizó y con el tiempo los usuarios del internet
+convirtieron esa deprimente caricatura en un meme, creando la famosa broma
+`Is this Loss?'\cite{loss},
+la cual consiste en generar una imagen divida en cuatro secciones siguiendo el patrón de la
 caricatura original, es decir, en el primer cuadro debe haber algo que asemeje a una persona parada, en el
-segundo y tercero a dos personas y en el cuarto a una persona parada y una acostada.
+segundo y tercero a dos personas y en el cuarto a una persona parada y una acostada, y que otros
+usuarios puedan dicho patrón.
 
-Por la naturaleza del meme, se genero una cantidad impresionante de 'edits' del mismo, en algunas de ellas
-es difícil saber si realmente corresponde al patrón o no. Se busca ver si una red neuronal puede identificar memes de este tipo, incluso cuando estos son difíciles de identificar para el ser humano.
+Por la naturaleza del meme, se genero una cantidad impresionante de ediciones o `edits' del mismo,
+y en algunas de ellas es realmente difícil saber si realmente corresponde al patrón o no, pues
+los usuarios pueden ser muy creativos y crear edits abstractos con figuras
+que no tienen nada que ver unas con las otras, o muy sutiles con imágenes similares seleccionadas y
+ordenadas específicamente para recrear el patrón.
+
+Lo que se busca aquí es ver si una red neuronal puede identificar edits de manera precisa, algo que
+ya se sabe puede ser difícil para el ser humano.
+
 \section{Redes Neuronales Convolucionales\cite{lecun}}
 
 Las redes convolucionales combinan tres ideas arquitectónicas para asegurar cierto
 grado de invariancia ante desplazamiento, reescalamiento y distorción: campos
-receptivos locales, pesos compartidos, y submuestreo espacial o temporal%
+receptivos locales (también llamados en la literatura filtros o \textit{kernels}),
+pesos compartidos, y submuestreo espacial o temporal%
 \footnote{En inglés, \textit{local receptive fields}, \textit{shared weights},
 \textit{spatial or temporal sub-sampling}.}.
 
@@ -150,7 +163,7 @@ deben ajustar en el entrenamiento\cite{haykin}.
 
 Entre las desventajas está el alto poder computacional requerido. Aunque hay una
 reducción de dimensionalidad al pasar de la entrada a mapas de características y
-pooling, la entrada suele tener dimensiones altas como se aprecia en la subsección
+aplicar pooling, la entrada suele tener dimensiones altas como se aprecia en la subsección
 anterior, por lo que capas convolucionales completas pueden tener un cantidad
 relativamente pequeña de mapas relativamente grandes, y aunque la dimensión sigue
 decreciendo en capas subsecuentes, el número de mapas sigue aumentando, entonces
@@ -191,6 +204,10 @@ econtrados que nos llevaron a descartar esta idea en el trabajo.
 \caption{Cómic original (izq.), patrón buscado (der.)}
 \label{fig:loss}
 \end{figure}
+
+Es importante aclarar que estas imágenes conservan un patrón muy específico, por
+lo que no tendría sentido realizar modificaciones como reflexiones o rotaciones
+a las imágenes pues la orientación de los objetos es clave en los edits.
 
 \subsection{Datos}
 
@@ -299,6 +316,10 @@ Journal of Machine Learning Research 12, 2121-2159.
 Kingma, D. P. \& Lei Ba, J. (2014).
 \textit{Adam: A Method for Stochastic Optimization}.
 arXiv:1412.6980. Obtenido de \url{http://arxiv.org/pdf/1412.6980.pdf}.
+
+\bibitem{loss}
+\textit{Talking to the Man Behind `Loss,' the Internet's Longest-Running Miscarriage `Joke'}.
+\url{http://nymag.com/selectall/2015/11/longest-running-miscarriage-meme-on-the-web.html}
 
 \end{thebibliography}
 
