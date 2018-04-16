@@ -306,6 +306,46 @@ parámetros son iguales.
 
 \section{Resultados}
 
+A contiuación se presentan los resultados obtenidos por los 4 modelos al final
+de las 10 épocas de entrenamiento. Al principio del entrenamiento los modelos
+tienen una precisión al rededor de 50\% pues están adivinando al azar y la pérdida
+suele ser elevada. Para comparación se agrega también los resultados obtenidos
+tras la primera época.
+
+\begin{center}
+\begin{tabular}{|l||r|r|r|r|}
+\hline
+\multicolumn{5}{|c|}{Primera época}
+\\ \hline
+& \multicolumn{2}{|c|}{Entrenamiento} & \multicolumn{2}{|c|}{Verificación}
+\\ \hline
+Modelo & Precisión & Pérdida & Precisión & Pérdida
+\\ \hline
+Modelo 1 & 57.55\% & 0.6792 & 65.89\% & 0.6082\\
+Modelo 2 & 59.53\% & 0.6497 & 75.64\% & 0.5496\\
+Modelo 3 & 57.34\% & 0.7224 & 64.50\% & 0.6368\\
+Modelo 4 & 53.81\% & 2.3251 & 58.00\% & 0.6743\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l||r|r|r|r|}
+\hline
+\multicolumn{5}{|c|}{Décima época}
+\\ \hline
+& \multicolumn{2}{|c|}{Entrenamiento} & \multicolumn{2}{|c|}{Verificación}
+\\ \hline
+Modelo & Precisión & Pérdida & Precisión & Pérdida
+\\ \hline
+Modelo 1 & 97.03\% & 0.0837 & 87.24\% & 0.3743\\
+Modelo 2 & 97.33\% & 0.0756 & 86.54\% & 0.3986\\
+Modelo 3 & 95.50\% & 0.1342 & 84.69\% & 0.3883\\
+Modelo 4 & 93.24\% & 0.1753 & 87.94\% & 0.3416\\
+\hline
+\end{tabular}
+\end{center}
+
 \section{Conclusiones}
 
 \begin{thebibliography}{9}
