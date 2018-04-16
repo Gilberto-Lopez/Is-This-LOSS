@@ -52,16 +52,18 @@ convirtieron esa deprimente caricatura en un meme, creando la famosa broma
 la cual consiste en generar una imagen divida en cuatro secciones siguiendo el patrón de la
 caricatura original, es decir, en el primer cuadro debe haber algo que asemeje a una persona parada, en el
 segundo y tercero a dos personas y en el cuarto a una persona parada y una acostada, y que otros
-usuarios puedan dicho patrón.
+usuarios puedan identificar dicho patrón.
 
-Por la naturaleza del meme, se genero una cantidad impresionante de ediciones o `edits' del mismo,
-y en algunas de ellas es realmente difícil saber si realmente corresponde al patrón o no, pues
+Por la naturaleza del meme, se generó una cantidad impresionante de ediciones o `edits' del mismo,
+y en algunas de ellas es sorprendentemente difícil saber si realmente corresponde al patrón o no, pues
 los usuarios pueden ser muy creativos y crear edits abstractos con figuras
 que no tienen nada que ver unas con las otras, o muy sutiles con imágenes similares seleccionadas y
 ordenadas específicamente para recrear el patrón.
 
 Lo que se busca aquí es ver si una red neuronal puede identificar edits de manera precisa, algo que
 ya se sabe puede ser difícil para el ser humano.
+
+% ¿Por qué no un algoritmo ad-hoc?
 
 \section{Redes Neuronales Convolucionales\cite{lecun}}
 
@@ -173,7 +175,8 @@ de un conjunto de datos para entrenamiento extenso para obtener buenos resutlado
 
 En la práctica se han visto casos de redes convolucionales con un desempeño pobre
 ante cambios pequeños como cambios de iluminación en fotos, por lo que se podría
-pensar que tienen una tendencia a sobreajustarse.
+pensar que tienen una tendencia a sobreajustarse y no entender o generalizar las
+características de los objetos que están procesando\cite{limitations}.
 
 \section{Propuesta e implementación}
 
@@ -279,7 +282,27 @@ Para la construcción de la red neuronal convolucional nos apoyamos de los
 paquetes \textsc{TensorFlow}\footnote{\url{http://www.tensorflow.org/}} y
 \textsc{Keras}\footnote{\url{http://keras.io}}.
 
-Para nuestros modelos construimos 4 redes convolucionales.
+Para nuestros modelos construimos 4 redes convolucionales con las siguientes
+arquitecturas:
+
+\begin{itemize}
+\item Modelo 1. Trabaja con imágenes en escala de grises. Tiene 2 capas de convolución
+con función de activación ReLU  32 filtros, la primera usa filtros de tamaño
+$5 \times 5$ con pasos (\textit{strides}) de 3, la segunda filtros de tamaño
+$3 \times 3$ con pasos de 2. La salida de cada capa pasa a una capa de max pooling
+con ventanas de $2 \times 2$ que no se traslapan. Finalmente un perceptrón multicapa
+con 2 capas ocultas de 64 nodos y activación ReLU y una capa de salida de un nodo
+con activación la función sigmoide (clasificaión binaria). Para el entrenamiento
+se usa el optimizador ADAM con función de pérdida entropía cruzada (\textit{Cross entropy}).
+La red se entrenó durante 10 épocas en lotes de 32 imágenes.
+\item Modelo 2. Exactamente lo mismo que el Modelo 1, pero trabajo con imágenes
+a color RGB.
+\item Modelo 3. El modelo 2 pero con optimizador ADAGRAD.
+\item Modelo 4. Trabaja con imágenes a color RGB. Primera capa oculta con 128
+filtros, pasos de 2; segunda capa oculta con 64 filtros y pasos de 1. Perceptrón
+multicapa con arquitectura (256,128,1). Optimizador ADAGRAD. Todo los demás
+parámetros son iguales.
+\end{itemize}
 
 \section{Resultados}
 
@@ -306,6 +329,11 @@ Artificial Neural Networks-ICANN 2010 Lecture Notes in Computer Science, 92-101.
 Lecun, Y., Bottou, L., Bengio, Y., \& Haffner, P. (1998).
 \textit{Gradient-Based Learning Applied to Document Recognition}.
 Proceedings of the IEEE, 86(11), 2278-2324. DOI:10.1109/5.726791.
+
+\bibitem{limitations}
+Hosseini, H., Xiao, B., Jaiswal, M., \& Poovendran, R. (2017).
+\textit{On the Limitation of Convolutional Neural Networks in Recognizing Negative Images}.
+arXiv:1703.06857. Obtenido de \url{https://arxiv.org/pdf/1703.06857.pdf}.
 
 \bibitem{adagrad}
 Ducji, J., Hazan, E., \& Singer, Y. (2011).
