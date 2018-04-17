@@ -64,9 +64,9 @@ Lo que se busca aquí es ver si una red neuronal puede identificar `edits' de ma
 ya se sabe puede ser difícil para el ser humano.
 
 % ¿Por qué no un algoritmo ad-hoc?
-Se eligió usar una red neuronal sobre algún algoritmo porqué las redes han mostrado un mejor desempeño en este tipo de procesamiento, i.e.
-reconocimiento de patrones, mientras que diseñar un algoritmo para este tipo de problemas puede llegar a ser muy complicado, en especial por el
-manejo de imágenes, ya que los `edits', del meme que intentaremos clasificar, suelen ser muy irregulares.
+Se eligió usar una red neuronal sobre algún algoritmo específicamente diseñado para este problema porque las redes han mostrado un mejor desempeño en este tipo de procesamiento, \textit{i.e.},
+reconocimiento de patrones en datos con una organización topológica, mientras que diseñar un algoritmo para este tipo de problemas puede llegar a ser muy complicado, en especial el
+manejo de imágenes, ya que los `edits' del meme que intentaremos clasificar suelen ser muy irregulares.
 
 \section{Redes Neuronales Convolucionales\cite{lecun}}
 
@@ -153,7 +153,13 @@ Nuestro espacio de hipótesis son todas las redes convolucionales para clasficac
 de imágenes en resolución $250 \times 250$ con 1 canal en escala de grises y 3
 canales en RGB, con $K = 2$ categorías. Esto es al menos
 \[ 2^{256^{250^2}} \text{  y  } 2^{256^{250^2 \cdot 3}}\]
-redes convolucionales respectivamente.
+redes convolucionales respectivamente. Si el clasificador que determina la cetegoría
+es un perceptrón multicapa, como en los modelos que se presentarán a continuación,
+el número de redes se vuelve infinito no numerable, pues estos clasficadores
+describen hiperplanos sobre espacios vecoriales reales, y algo similar hacen las
+capas convolucionales, aunque la intuición geométrica parece carecer de sentido pues no
+es claro cómo se pueden dividir imágenes en un espacio producto tensorial con
+hiperplanos.
 
 \subsection{Ventajas y desventajas}
 
@@ -348,6 +354,17 @@ Modelo 4 & 93.24\% & 0.1753 & 87.94\% & 0.3416\\
 \hline
 \end{tabular}
 \end{center}
+
+Pasadas 10 épocas, la mejora en precisión es muy poca pero notamos que el modelo
+se estaba sobreajustando, en pruebas previas se logró
+llegar incluso al 90\% de precisión sobre el conjunto de verificación, pero la
+pérdida se elevaba mucho.
+
+Se descargaron nuevos edits de \textsf{r/lossedits} que no están presentes en
+los conjuntos de entrenamiento ni verificación y los modelos hacen un buen trabajo
+reconociéndolos. Por supuesto, hay imágenes que los modelos no clasifican
+correctamente, por ejemplo el edit basado en colores de la Figura ~\ref{fig:color}
+que ningún modelo pudo classificar como \texttt{loss\_edit}.
 
 \section{Conclusiones}
 
