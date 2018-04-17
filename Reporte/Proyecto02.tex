@@ -56,14 +56,17 @@ usuarios puedan identificar dicho patrón.
 
 Por la naturaleza del meme, se generó una cantidad impresionante de ediciones o `edits' del mismo,
 y en algunas de ellas es sorprendentemente difícil saber si realmente corresponde al patrón o no, pues
-los usuarios pueden ser muy creativos y crear edits abstractos con figuras
+los usuarios pueden ser muy creativos y crear `edits' abstractos con figuras
 que no tienen nada que ver unas con las otras, o muy sutiles con imágenes similares seleccionadas y
 ordenadas específicamente para recrear el patrón.
 
-Lo que se busca aquí es ver si una red neuronal puede identificar edits de manera precisa, algo que
+Lo que se busca aquí es ver si una red neuronal puede identificar `edits' de manera precisa, algo que
 ya se sabe puede ser difícil para el ser humano.
 
 % ¿Por qué no un algoritmo ad-hoc?
+Se eligió usar una red neuronal sobre algún algoritmo porqué las redes han mostrado un mejor desempeño en este tipo de procesamiento, i.e.
+reconocimiento de patrones, mientras que diseñar un algoritmo para este tipo de problemas puede llegar a ser muy complicado, en especial por el
+manejo de imágenes, ya que los `edits', del meme que intentaremos clasificar, suelen ser muy irregulares.
 
 \section{Redes Neuronales Convolucionales\cite{lecun}}
 
@@ -181,16 +184,16 @@ características de los objetos que están procesando\cite{limitations}.
 \section{Propuesta e implementación}
 
 Para la clasificación de imágenes en nuestras dos categorías \texttt{loss\_edit}
-y \texttt{not\_loss}, donde la primera son edits de Loss y la segunda memes
+y \texttt{not\_loss}, donde la primera son `edits' de Loss y la segunda memes
 variados, utilizaremos una red neuronal convolucional, la entrenaremos para que
-aprenda a determinar qué imágenes o memes son edits de Loss, los cuales siguen
+aprenda a determinar qué imágenes o memes son `edits' de Loss, los cuales siguen
 un patrón muy específico, imitando el cómic Loss%
 \footnote{\url{http://cad-comic.com/comic/loss/}} (ver Figura ~\ref{fig:loss}).
 
 Una primera aproximación sería tratar de clasificar imágenes en escala de grises
 pues lo que importa para la clasificación es reconocer los objetos que aparecen
 en ellas y comparar su orientación con el patrón buscado. Por desgracia existen
-edits basados en la distinción de colores (ver Figura ~\ref{fig:color}), por lo
+`edits' basados en la distinción de colores (ver Figura ~\ref{fig:color}), por lo
 que podría ser más preciso trabajar con colores (por si distintos colores se
 ``funden'' en la escala de grises por tener un tono similar).
 
@@ -210,18 +213,18 @@ econtrados que nos llevaron a descartar esta idea en el trabajo.
 
 Es importante aclarar que estas imágenes conservan un patrón muy específico, por
 lo que no tendría sentido realizar modificaciones como reflexiones o rotaciones
-a las imágenes pues la orientación de los objetos es clave en los edits.
+a las imágenes pues la orientación de los objetos es clave en los `edits'.
 
 \subsection{Datos}
 
 El conjunto de datos consiste de una colección de 1735 imágenes, 1304 para
-entrenamiento (con 558 edits) y 431 para verificación (con 185 edits), divididas
+entrenamiento (con 558 `edits') y 431 para verificación (con 185 `edits'), divididas
 en nuestras ya mencionadas dos categorías.
 
 Los memes variados se obtuvieron de la colección personal de memes de los
 desarrolladores, obtenidas con el paso del tiempo ya sea descargándolas de
 distintos sitios de internet como redes sociales, chats de WhatsApp, Messenger,
-etc., mientras que los edits de Loss se descargaron principalmente de la galería
+etc., mientras que los `edits' de Loss se descargaron principalmente de la galería
 de \textsf{KnowYourMeme.com}\footnote{\url{http://knowyourmeme.com/memes/loss/photos}} y
 \textsf{Google Images} (que son miniaturas de distintos sitios, como el subreddit
 \textsf{r/lossedits}\footnote{\url{http://reddit.com/r/lossedits}} y
@@ -231,13 +234,13 @@ de \textsf{KnowYourMeme.com}\footnote{\url{http://knowyourmeme.com/memes/loss/ph
 
 El primer paso fue cambiar la resolución de las imágenes para tener un dataset
 más uniforme (aunque se reescalarán posteriormente de nuevo pues la red neuronal
-necesita entradas de tamaño fijo). Dado que las miniaturas de edits tienen baja
+necesita entradas de tamaño fijo). Dado que las miniaturas de `edits' tienen baja
 resolución (entre 200 y 300 pixeles de ancho/alto), los memes variados fueron
 reescalados para tener una resolución similar (250 pixeles de ancho), después se
 dividió el conjunto completo de imágenes en conjuntos de entrenamiento y
 verificación de manera aleatoria.
 
-Algunos edits de Loss se basan en el uso de colores, pero en general es la
+Algunos `edits' de Loss se basan en el uso de colores, pero en general es la
 orientación de los polígonos lo que importa como se ve en la Figura ~\ref{fig:color}.
 Para tratar estos casos se construyen modelos que trabajan con imágenes a color
 y en escala de grises.
@@ -255,7 +258,7 @@ y en escala de grises.
 Procesar las imágenes para obtener las aristas se consideró una propuesta poco
 viable pues se tiene mucho ruido o se pierde información. Usando el modelo
 \textsc{Canny} de \textsc{OpenCV} para obtener las aristas presentes en una imagen
-nos encontramos con mucho ruido, por ejemplo, si un edit se contruyó con fotografías
+nos encontramos con mucho ruido, por ejemplo, si un edit se construyó con fotografías
 con muchos detalles en ellas y objetos innecesarios no fueron desenfocados, las
 aristas de dichos objetos se extraen en conjunto con los polígonos que nos
 interesan. Si modificamos los umbrales inferior y superior del modelo para filtrar
