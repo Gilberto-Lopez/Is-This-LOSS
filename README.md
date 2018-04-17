@@ -62,10 +62,40 @@ Las redes convolucionales se construyen en Python sobre [Keras](https://keras.io
 
 ## Ejecución
 
+Hay dos scripts: `CNN.py` para construir y entrenar una red convolucional y `TEST.py` para probar un modelo.
+
 Sobre el directorio donde tenga el dataset y el script `cnn.py` ejecute el comando
 
+### Construcción de la red
+
+Con el script `CNN.py` se puede construir una red, se deben proporcionar los parámetros describiendo la arquitectura de la red. Puede obtener información
+de los parámetros con el comando
+
 ```bash
-$ python cnn.py
+$ python CNN.py -h
+```
+
+La red será entrenada con un dataset que siga la organización de directorios antes descrita.
+
+Para construir el Modelo 1 descrito en el reporte del proyecto ejecute el siguiente comando:
+
+```bash
+$ python CNN.py -cl 2 -f 32 32 -d 5 3 -s 3 2 -dl 2 -a 64 64 -D dataset/ -o Modelo_1.h5
+```
+
+Para construir el Modelo 3:
+
+```bash
+$ python CNN.py -cl 2 -f 32 32 -d 5 3 -s 3 2 -dl 2 -a 64 64 -D dataset/ --RGB --optimizer adagrad -o Modelo_3.h5
+```
+
+### Probando la red
+
+Con el script `TEST.py` se puede probar una red previamente entrenada con imágenes proporcionadas por el usuario. Puede obtener información
+de los parámetros con el comando
+
+```bash
+$ python TEST.py -h
 ```
 
 ### Nota
