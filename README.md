@@ -58,13 +58,13 @@ El dataset contiene los memes de los desarrolladores, una colección bastante ed
 
 ## Implementación
 
-Las redes convolucionales se construyen en Python sobre [Keras](https://keras.io "Keras Documentation") con [TensorFlow](https://www.tensorflow.org/ "TensorFlow") como backend.
+Las redes convolucionales se construyen en Python sobre [Keras](https://keras.io "Keras Documentation") con [TensorFlow](https://www.tensorflow.org/ "TensorFlow") como backend, por lo que estos paquetes son necesarios.
+
+También es necesario el paquete `h5py` para guardar y cargar modelos ya entrenados, así como `OpenCV` y `NumPy` para procesamiento de imágenes y tensores.
 
 ## Ejecución
 
 Hay dos scripts: `CNN.py` para construir y entrenar una red convolucional y `TEST.py` para probar un modelo.
-
-Sobre el directorio donde tenga el dataset y el script `cnn.py` ejecute el comando
 
 ### Construcción de la red
 
