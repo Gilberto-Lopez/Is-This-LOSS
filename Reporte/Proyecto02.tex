@@ -371,7 +371,8 @@ que ningún modelo pudo classificar como \texttt{loss\_edit}.
 Podemos apreciar como los diferentes modelos no cambian mucho sus valores de precisión y pérdida, a pesar
 de que el modelo sea significativamente mas grande que los otros modelos, el hecho de que se cambie de
 optimizador o se utilice la escala de grises contra las imagenes con sus colores normales, no tienen una mejora
-significativa.
+significativa. Probablemente una manera de mejorar los resultados sea explorando mas opciones en el preprocesamiento
+de las imágenes, como aplicar fitros de imagen haciendo que el patrón que estamos busacndo resalte sobre el resto de la imágen.
 
 Como conclusión nos atrevemos a decir que para una red neuronal convolusional tiene un buen desempeño en el
 problema de reconocer si una imagen cumple con un patrón, en este caso siendo el meme de Loss el patrón a
