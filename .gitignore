@@ -108,3 +108,9 @@ dataset/
 **/*.pdf
 **/*.aux
 **/*.log
+
+# Images
+**/*.jpg
+**/*.jpeg
+**/*.png
+
